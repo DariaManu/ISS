@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserWindowController">
+   <children>
+      <Separator layoutX="336.0" orientation="VERTICAL" prefHeight="504.0" prefWidth="0.0" />
+      <ListView fx:id="availableBooksListView" layoutX="381.0" layoutY="58.0" prefHeight="364.0" prefWidth="218.0" />
+      <ListView fx:id="borrowedBooksListView" layoutX="650.0" layoutY="58.0" prefHeight="364.0" prefWidth="218.0" />
+      <Label layoutX="381.0" layoutY="33.0" prefHeight="18.0" prefWidth="218.0" text="Available books" />
+      <Label layoutX="650.0" layoutY="33.0" prefHeight="18.0" prefWidth="218.0" text="Your borrowed books" />
+      <Button fx:id="borrowButton" layoutX="381.0" layoutY="444.0" mnemonicParsing="false" onAction="#borrow" prefHeight="26.0" prefWidth="110.0" text="Borrow" />
+      <Button fx:id="logoutButton" layoutX="765.0" layoutY="469.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="102.0" text="Log Out" />
+      <TextField layoutX="27.0" layoutY="29.0" prefHeight="26.0" prefWidth="189.0" promptText=" Search for books in the library" />
+      <Button layoutX="241.0" layoutY="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Search" />
+      <Label layoutX="27.0" layoutY="125.0" prefHeight="26.0" prefWidth="148.0" text="Filter by preferences" />
+      <Label layoutX="27.0" layoutY="179.0" prefHeight="18.0" prefWidth="66.0" text="Genre" />
+      <Label layoutX="27.0" layoutY="221.0" prefHeight="18.0" prefWidth="66.0" text="Author" />
+      <Label layoutX="27.0" layoutY="268.0" prefHeight="18.0" prefWidth="66.0" text="Release year" />
+      <TextField layoutX="100.0" layoutY="175.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField layoutX="100.0" layoutY="217.0" prefHeight="26.0" prefWidth="218.0" />
+      <TextField layoutX="100.0" layoutY="264.0" prefHeight="26.0" prefWidth="218.0" />
+      <Button layoutX="141.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" text="Apply filters" />
+      <Button layoutX="27.0" layoutY="395.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="290.0" text="Get a recommendation" />
+      <Separator layoutX="-2.0" layoutY="98.0" prefHeight="0.0" prefWidth="339.0" />
+      <Separator layoutX="-2.0" layoutY="366.0" prefHeight="3.0" prefWidth="339.0" />
+   </children>
+</AnchorPane>
