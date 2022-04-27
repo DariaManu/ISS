@@ -153,6 +153,17 @@ public class ServiceProxy implements IService{
         }
     }
 
+    @Override
+    public void addBook(Book book) throws Exception {
+        Request request = new Request.Builder().setRequestType(RequestType.ADD_BOOK).setData(book).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+    }
+
     private void closeConnection() {
         finished = true;
         try{

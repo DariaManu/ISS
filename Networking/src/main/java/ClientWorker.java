@@ -174,6 +174,17 @@ public class ClientWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleADD_BOOK(Request request) {
+        System.out.println("AddBook request...");
+        Book book = (Book) request.getData();
+        try {
+            service.addBook(book);
+            return okResponse;
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
     @Override
     public void bookWasBorrowed(List<Book> availableBooks) throws Exception{
         Response response = new Response.Builder().setResponseType(ResponseType.BOOK_BORROWED).setData(availableBooks).build();

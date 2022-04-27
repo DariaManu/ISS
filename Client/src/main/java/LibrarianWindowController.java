@@ -9,7 +9,6 @@ import javafx.util.Callback;
 import java.util.List;
 
 public class LibrarianWindowController {
-    private Button viewAllBooksButton;
     private IService server;
     private Stage primaryStage;
 
@@ -22,6 +21,20 @@ public class LibrarianWindowController {
     private ObservableList<Book> borrowedBooksModel = FXCollections.observableArrayList();
     @FXML
     private Button returnBookButton;
+    @FXML
+    private Button viewAllBooksButton;
+    @FXML
+    private TextField isbnTextField;
+    @FXML
+    private TextField titleTextField;
+    @FXML
+    private TextField authorTextField;
+    @FXML
+    private TextField genreTextField;
+    @FXML
+    private TextField publishYearTextField;
+    @FXML
+    private Button addBookButton;
 
     @FXML
     public void initialize() {
@@ -74,6 +87,24 @@ public class LibrarianWindowController {
         Alert alert = new Alert(Alert.AlertType.NONE, message, ButtonType.OK);
         alert.setTitle(title);
         alert.showAndWait();
+    }
+
+    public void addBook(ActionEvent event) {
+        String ISBN = isbnTextField.getText();
+        String title = titleTextField.getText();
+        String author = authorTextField.getText();
+        String genre = genreTextField.getText();
+        Integer publishYear = Integer.valueOf(publishYearTextField.getText());
+        try {
+            Book book = new Book(ISBN, title, author, genre, publishYear, Status.AVAILABLE);
+            server.addBook(book);
+        } catch (Exception exception) {
+            showPopUpWindow("Warn", exception.getMessage());
+        }
+    }
+
+    public void showAllBooks(ActionEvent event) {
+
     }
 
     static class BookListCell extends ListCell<Book> {
