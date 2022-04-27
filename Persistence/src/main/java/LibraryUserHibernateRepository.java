@@ -34,6 +34,31 @@ public class LibraryUserHibernateRepository implements ILibraryUserRepository {
     }
 
     @Override
+    public LibraryUser findByEmail(String email) {
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+        LibraryUser libraryUser = null;
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                libraryUser = session.createNativeQuery("SELECT * FROM LibraryUsers " +
+                        "WHERE email=?", LibraryUser.class)
+                        .setParameter(1, email)
+                        .setMaxResults(1)
+                        .uniqueResult();
+                transaction.commit();
+                return libraryUser;
+            } catch (RuntimeException exception) {
+                if (transaction != null)
+                    transaction.rollback();
+            }
+        } catch (Exception exception) {
+            System.out.println("Exception " + exception.getMessage());
+        }
+        return libraryUser;
+    }
+
+    @Override
     public void add(LibraryUser elem) {
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         try(Session session = sessionFactory.openSession()) {

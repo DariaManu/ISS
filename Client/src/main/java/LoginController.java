@@ -38,6 +38,8 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("librarian-window.fxml"));
                 Scene scene = new Scene(loader.load());
                 LibrarianWindowController librarianWindowController = loader.getController();
+                librarianWindowController.setServer(server);
+                librarianWindowController.setPrimaryStage(primaryStage);
                 primaryStage.setScene(scene);
             } catch (Exception exception) {
                 showPopUpWindow("Authentication failure", exception.getMessage());

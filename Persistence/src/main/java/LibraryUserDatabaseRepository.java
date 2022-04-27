@@ -91,4 +91,9 @@ public class LibraryUserDatabaseRepository implements ILibraryUserRepository{
         }
         return libraryUser;
     }
+
+    @Override
+    public LibraryUser findByEmail(String email) {
+        return null;
+    }
 }

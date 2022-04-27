@@ -60,6 +60,22 @@ public class ServiceProxy implements IService{
     }
 
     @Override
+    public List<Book> searchLibraryUserAndGetBooks(String email) throws Exception {
+        Request request = new Request.Builder().setRequestType(RequestType.SEARCH_LIBRARY_USER).setData(email).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.OK) {
+            List<Book> books = (List<Book>) response.getData();
+            return books;
+        }
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+        return null;
+    }
+
+    @Override
     public void logoutLibraryUser(LibraryUser libraryUser) throws Exception {
         Request request = new Request.Builder().setRequestType(RequestType.LOGOUT).setData(libraryUser).build();
         sendRequest(request);

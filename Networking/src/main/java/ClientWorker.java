@@ -130,6 +130,17 @@ public class ClientWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleSEARCH_LIBRARY_USER(Request request) {
+        System.out.println("SearchLibraryUser request...");
+        String email = (String) request.getData();
+        try {
+            List<Book> books = service.searchLibraryUserAndGetBooks(email);
+            return new Response.Builder().setResponseType(ResponseType.OK).setData(books).build();
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
     private Response handleGET_BORROWED_BOOKS(Request request) {
         System.out.println("GetBorrowedBooks request");
         Integer libraryUserId = (Integer) request.getData();

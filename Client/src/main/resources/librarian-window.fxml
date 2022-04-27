@@ -5,12 +5,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LibrarianWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LibrarianWindowController">
    <children>
-      <TextField layoutX="28.0" layoutY="29.0" prefHeight="26.0" prefWidth="211.0" promptText="Search for a library member" />
-      <Button layoutX="285.0" layoutY="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" text="Search" />
-      <ListView layoutX="28.0" layoutY="72.0" prefHeight="222.0" prefWidth="338.0" />
-      <Button layoutX="28.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Return book" />
+      <TextField fx:id="searchTextField" layoutX="28.0" layoutY="29.0" prefHeight="26.0" prefWidth="211.0" promptText="Search for a library member" />
+      <Button fx:id="searchButton" layoutX="285.0" layoutY="30.0" mnemonicParsing="false" onAction="#searchLibraryUser" prefHeight="26.0" prefWidth="78.0" text="Search" />
+      <ListView fx:id="borrowedBooksListView" layoutX="28.0" layoutY="72.0" prefHeight="222.0" prefWidth="338.0" />
+      <Button fx:id="returnBookButton" layoutX="28.0" layoutY="323.0" mnemonicParsing="false" onAction="#returnBook" prefHeight="26.0" prefWidth="118.0" text="Return book" />
+      <Button fx:id="viewAllBooksButton" layoutX="239.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="View all books" />
+      <TextField layoutX="414.0" layoutY="72.0" prefHeight="26.0" prefWidth="189.0" promptText="ISBN" />
+      <TextField layoutX="414.0" layoutY="121.0" prefHeight="26.0" prefWidth="190.0" promptText="Title" />
+      <TextField layoutX="414.0" layoutY="170.0" prefHeight="26.0" prefWidth="190.0" promptText="Author" />
+      <TextField layoutX="414.0" layoutY="219.0" prefHeight="26.0" prefWidth="190.0" promptText="Genre" />
+      <TextField layoutX="414.0" layoutY="269.0" prefHeight="26.0" prefWidth="190.0" promptText="Publish Year" />
+      <Button layoutX="509.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Add book" />
    </children>
 </AnchorPane>

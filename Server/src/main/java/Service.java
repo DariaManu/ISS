@@ -93,6 +93,17 @@ public class Service implements IService {
         return searchedLibrarian;
     }
 
+    @Override
+    public List<Book> searchLibraryUserAndGetBooks(String email) throws Exception {
+        LibraryUser libraryUser = libraryUserRepo.findByEmail(email);
+        if (libraryUser != null) {
+            List<Book> booksBorrowed = getBooksBorrowedByLibraryUser(libraryUser.getID());
+            return booksBorrowed;
+        } else {
+            throw new Exception("Incorrect credentials");
+        }
+    }
+
     private void notifyBookWasBorrowed() {
         List<LibraryUser> libraryUsers = libraryUserRepo.getAll().stream().toList();
         List<Book> availableBooks = bookRepo.getAvailableBooks();
