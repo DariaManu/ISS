@@ -20,7 +20,7 @@ public class BorrowDatabaseRepository implements IBorrowRepository {
                 "(?, ?, ?)")) {
             preparedStatement.setInt(1, elem.getBook().getID());
             preparedStatement.setInt(2, elem.getLibraryUser().getID());
-            preparedStatement.setDate(3, Date.valueOf(elem.getDate()));
+            preparedStatement.setDate(3, (Date) elem.getDate());
             preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             System.out.println("Error DB " + exception);
@@ -69,7 +69,7 @@ public class BorrowDatabaseRepository implements IBorrowRepository {
                     LibraryUser libraryUser = new LibraryUser(libraryUserId, cnp, name, address, phone, email);
 
                     int borrow_id = resultSet.getInt("borrow_id");
-                    LocalDate date = resultSet.getTimestamp("date").toLocalDateTime().toLocalDate();
+                    Date date = resultSet.getDate("date");
                     Borrow borrow = new Borrow(borrow_id, book, libraryUser, date);
                     borrows.add(borrow);
                 }
@@ -108,7 +108,7 @@ public class BorrowDatabaseRepository implements IBorrowRepository {
                     LibraryUser libraryUser = new LibraryUser(libraryUserId, cnp, name, address, phone, email);
 
                     int borrow_id = resultSet.getInt("borrow_id");
-                    LocalDate date = resultSet.getTimestamp("date").toLocalDateTime().toLocalDate();
+                    Date date = resultSet.getDate("date");
                     Borrow borrow = new Borrow(borrow_id, book, libraryUser, date);
                     borrows.add(borrow);
                 }

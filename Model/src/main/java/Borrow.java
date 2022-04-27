@@ -1,23 +1,30 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Borrow implements Identifiable<Integer>, Serializable {
     private Integer ID;
     private Book book;
     private LibraryUser libraryUser;
-    private LocalDate date;
+    private Date date;
 
-    public Borrow(Integer ID, Book book, LibraryUser libraryUser, LocalDate date) {
+    public Borrow(Integer ID, Book book, LibraryUser libraryUser, Date date) {
         this.ID = ID;
         this.book = book;
         this.libraryUser = libraryUser;
         this.date = date;
     }
 
-    public Borrow(Book book, LibraryUser libraryUser, LocalDate date) {
-        this.book = book;
-        this.libraryUser = libraryUser;
-        this.date = date;
+    public Borrow(Book book, LibraryUser libraryUser, Date date) {
+            this.book = book;
+            this.libraryUser = libraryUser;
+            this.date = date;
+    }
+
+    public Borrow() {
+        this.book = null;
+        this.libraryUser = null;
+        this.date = null;
     }
 
     @Override
@@ -46,11 +53,11 @@ public class Borrow implements Identifiable<Integer>, Serializable {
         this.libraryUser = libraryUser;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -8,10 +8,10 @@
         <id name="ID" column="library_user_id">
             <generator class="increment"></generator>
         </id>
-        <property name="cnp" column="cnp"></property>
+        <property name="cnp" column="cnp" unique="true"></property>
         <property name="name" column="name"></property>
         <property name="address" column="address"></property>
         <property name="phone" column="phone"></property>
-        <property name="email" column="email"></property>
+        <property name="email" column="email" unique="true"></property>
     </class>
 </hibernate-mapping>

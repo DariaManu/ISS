@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class UserWindowController implements IObserver {
@@ -108,7 +109,7 @@ public class UserWindowController implements IObserver {
         if(borrowedBooksModel.size() < 5){
             Book book = availableBooksListView.getSelectionModel().getSelectedItem();
             if(book != null) {
-                Borrow borrow = new Borrow(book, libraryUser, LocalDate.now());
+                Borrow borrow = new Borrow(book, libraryUser, new Date());
                 try {
                     server.borrowBook(borrow);
                     borrowedBooksModel.add(book);
