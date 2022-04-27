@@ -133,6 +133,13 @@ public class UserWindowController implements IObserver {
         });
     }
 
+    @Override
+    public void bookWasReturned(List<Book> availableBooks) throws Exception {
+        Platform.runLater(() -> {
+            availableBooksModel.setAll(availableBooks);
+        });
+    }
+
     public void showBorrowedBooks(ActionEvent event) {
         loadBorrowedBooks();
     }

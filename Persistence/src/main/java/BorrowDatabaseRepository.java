@@ -126,4 +126,16 @@ public class BorrowDatabaseRepository implements IBorrowRepository {
         }
         return borrows;
     }
+
+    @Override
+    public void deleteByBookId(Integer bookId) {
+        Connection connection = dbUtils.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Borrows " +
+                "WHERE book_id=?")) {
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            System.out.println("Error DB " + exception);
+        }
+    }
 }

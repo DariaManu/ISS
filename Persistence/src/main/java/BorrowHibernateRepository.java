@@ -33,6 +33,11 @@ public class BorrowHibernateRepository implements IBorrowRepository {
     }
 
     @Override
+    public void deleteByBookId(Integer bookId) {
+
+    }
+
+    @Override
     public void add(Borrow elem) {
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {

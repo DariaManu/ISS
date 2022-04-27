@@ -163,10 +163,32 @@ public class ClientWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleRETURN_BOOK(Request request) {
+        System.out.println("ReturnBook request");
+        Book book = (Book) request.getData();
+        try {
+            service.returnBook(book);
+            return okResponse;
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
     @Override
     public void bookWasBorrowed(List<Book> availableBooks) throws Exception{
         Response response = new Response.Builder().setResponseType(ResponseType.BOOK_BORROWED).setData(availableBooks).build();
         System.out.println("A book was borrowed");
+        try {
+            sendResponse(response);
+        } catch (IOException exception) {
+            throw new Exception("Sending error: " + exception);
+        }
+    }
+
+    @Override
+    public void bookWasReturned(List<Book> availableBooks) throws Exception {
+        Response response = new Response.Builder().setResponseType(ResponseType.BOOK_RETURNED).setData(availableBooks).build();
+        System.out.println("A book was returned");
         try {
             sendResponse(response);
         } catch (IOException exception) {

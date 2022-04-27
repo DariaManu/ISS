@@ -18,7 +18,7 @@ public class LibrarianWindowController {
     @FXML
     private Button searchButton;
     @FXML
-    private ListView borrowedBooksListView;
+    private ListView<Book> borrowedBooksListView;
     private ObservableList<Book> borrowedBooksModel = FXCollections.observableArrayList();
     @FXML
     private Button returnBookButton;
@@ -57,6 +57,17 @@ public class LibrarianWindowController {
     }
 
     public void returnBook(ActionEvent event) {
+        Book book = borrowedBooksListView.getSelectionModel().getSelectedItem();
+        if (book == null) {
+            showPopUpWindow("Warn", "No book selected!");
+        } else {
+            try {
+                server.returnBook(book);
+                borrowedBooksModel.remove(book);
+            } catch (Exception exception) {
+                showPopUpWindow("Warn", exception.getMessage());
+            }
+        }
     }
 
     private void showPopUpWindow(String title, String message) {

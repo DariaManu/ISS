@@ -104,6 +104,14 @@ public class Service implements IService {
         }
     }
 
+    @Override
+    public void returnBook(Book book) throws Exception {
+        borrowRepo.deleteByBookId(book.getID());
+        book.setStatus(Status.AVAILABLE);
+        bookRepo.update(book, book.getID());
+        notifyBookWasReturned();
+    }
+
     private void notifyBookWasBorrowed() {
         List<LibraryUser> libraryUsers = libraryUserRepo.getAll().stream().toList();
         List<Book> availableBooks = bookRepo.getAvailableBooks();
@@ -122,6 +130,25 @@ public class Service implements IService {
             }
         }
         executor.shutdown();
+    }
+
+    private void notifyBookWasReturned() {
+        List<LibraryUser> libraryUsers = libraryUserRepo.getAll().stream().toList();
+        List<Book> availableBooks = bookRepo.getAvailableBooks();
+        ExecutorService executor = Executors.newFixedThreadPool(defaultThreadsNo);
+        for (LibraryUser libraryUser: libraryUsers) {
+            IObserver client = loggedClients.get(libraryUser.getEmail());
+            if(client != null) {
+                executor.execute(() -> {
+                    try {
+                        System.out.println("Notifying [" + libraryUser.getEmail() + "] that a book was returned.");
+                        client.bookWasReturned(availableBooks);
+                    } catch (Exception exception) {
+                        System.out.println("Error notifying library users " + exception);
+                    }
+                });
+            }
+        }
     }
 
 }

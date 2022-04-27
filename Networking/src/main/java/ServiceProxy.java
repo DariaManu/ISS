@@ -142,6 +142,17 @@ public class ServiceProxy implements IService{
         }
     }
 
+    @Override
+    public void returnBook(Book book) throws Exception {
+        Request request = new Request.Builder().setRequestType(RequestType.RETURN_BOOK).setData(book).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+    }
+
     private void closeConnection() {
         finished = true;
         try{
@@ -192,11 +203,22 @@ public class ServiceProxy implements IService{
     }
 
     private void handleUpdate(Response response) {
-        if(response.getResponseType() == ResponseType.BOOK_BORROWED) {
+        if (response.getResponseType() == ResponseType.BOOK_BORROWED) {
             System.out.println("A book was borrowed");
             try {
                 List<Book> availableBooks = (List<Book>) response.getData();
-                client.bookWasBorrowed(availableBooks);
+                if (client != null)
+                    client.bookWasBorrowed(availableBooks);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        if (response.getResponseType() == ResponseType.BOOK_RETURNED) {
+            System.out.println("A book was returned");
+            try {
+                List<Book> availableBooks = (List<Book>) response.getData();
+                if (client != null)
+                    client.bookWasReturned(availableBooks);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -204,7 +226,7 @@ public class ServiceProxy implements IService{
     }
 
     private boolean isUpdate(Response response) {
-        return response.getResponseType() == ResponseType.BOOK_BORROWED;
+        return response.getResponseType() == ResponseType.BOOK_BORROWED || response.getResponseType() == ResponseType.BOOK_RETURNED;
     }
 
     private class ReaderThread implements Runnable {
