@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="Book" table="Books">
+        <id name="ID" column="book_id">
+            <generator class="increment"></generator>
+        </id>
+        <property name="ISBN" column="isbn"></property>
+        <property name="title" column="title"></property>
+        <property name="author" column="author"></property>
+        <property name="genre" column="genre"></property>
+        <property name="publishYear" column="publish_year"></property>
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">Status</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -14,5 +14,9 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
+        <mapping resource="LibraryUser.hbm.xml"/>
+        <mapping resource="Book.cfg.xml"/>
+        <mapping resource="Borrow.hbm.xml"/>
+
     </session-factory>
 </hibernate-configuration>
