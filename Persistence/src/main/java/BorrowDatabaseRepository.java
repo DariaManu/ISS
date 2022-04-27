@@ -1,9 +1,13 @@
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
+import java.sql.Date;
 
 public class BorrowDatabaseRepository implements IBorrowRepository {
     private JdbcUtils dbUtils;
@@ -20,7 +24,11 @@ public class BorrowDatabaseRepository implements IBorrowRepository {
                 "(?, ?, ?)")) {
             preparedStatement.setInt(1, elem.getBook().getID());
             preparedStatement.setInt(2, elem.getLibraryUser().getID());
-            preparedStatement.setDate(3, (Date) elem.getDate());
+            Instant instant = elem.getDate().toInstant();
+            ZoneId zoneId = ZoneId.systemDefault();
+            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+            LocalDate localDate = zdt.toLocalDate();
+            preparedStatement.setDate(3, java.sql.Date.valueOf(localDate));
             preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             System.out.println("Error DB " + exception);

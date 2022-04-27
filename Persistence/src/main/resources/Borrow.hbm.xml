@@ -10,6 +10,6 @@
         </id>
         <many-to-one name="book" column="book_id"></many-to-one>
         <many-to-one name="libraryUser" column="library_user_id"></many-to-one>
-        <property name="date" type="date" column="date"></property>
+        <property name="date" type="timestamp" column="date"></property>
     </class>
 </hibernate-mapping>

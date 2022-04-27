@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 public class StartServer {
@@ -18,7 +20,12 @@ public class StartServer {
         IBookRepository bookRepository = new BookDatabaseRepository(serverProperties);
         ILibraryUserRepository libraryUserRepository = new LibraryUserDatabaseRepository(serverProperties);
         IBorrowRepository borrowRepository = new BorrowDatabaseRepository(serverProperties);
-        IService service = new Service(bookRepository, libraryUserRepository, borrowRepository);
+
+        BookHibernateRepository bookHibernateRepository = new BookHibernateRepository();
+        LibraryUserHibernateRepository libraryUserHibernateRepository = new LibraryUserHibernateRepository();
+        BorrowHibernateRepository borrowHibernateRepository = new BorrowHibernateRepository();
+        //IService service = new Service(bookRepository, libraryUserRepository, borrowRepository);
+        IService service = new Service(bookHibernateRepository, libraryUserHibernateRepository, borrowRepository);
 
         int serverPort = defaultPort;
         try{

@@ -133,6 +133,10 @@ public class UserWindowController implements IObserver {
         });
     }
 
+    public void showBorrowedBooks(ActionEvent event) {
+        loadBorrowedBooks();
+    }
+
     static class BookListCell extends ListCell<Book> {
         @Override
         protected void updateItem(Book item, boolean empty) {
