@@ -164,6 +164,19 @@ public class ServiceProxy implements IService{
         }
     }
 
+    @Override
+    public List<Book> getAllBooks() throws Exception {
+        Request request = new Request.Builder().setRequestType(RequestType.GET_ALL_BOOKS).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+        List<Book> books = (List<Book>) response.getData();
+        return books;
+    }
+
     private void closeConnection() {
         finished = true;
         try{

@@ -118,6 +118,11 @@ public class Service implements IService {
         notifyBookWasReturned();
     }
 
+    @Override
+    public List<Book> getAllBooks() throws Exception {
+        return bookRepo.getAll().stream().toList();
+    }
+
     private void notifyBookWasBorrowed() {
         List<LibraryUser> libraryUsers = libraryUserRepo.getAll().stream().toList();
         List<Book> availableBooks = bookRepo.getAvailableBooks();

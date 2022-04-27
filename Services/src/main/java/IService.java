@@ -11,4 +11,5 @@ public interface IService {
     List<Book> searchLibraryUserAndGetBooks(String email) throws Exception;
     void returnBook(Book book) throws Exception;
     void addBook(Book book) throws Exception;
+    List<Book> getAllBooks() throws Exception;
 }

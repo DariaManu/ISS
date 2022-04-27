@@ -2,6 +2,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -42,7 +44,7 @@ public class LibrarianWindowController {
         borrowedBooksListView.setCellFactory(new Callback<ListView<Book>, ListCell<Book>>() {
             @Override
             public ListCell<Book> call(ListView<Book> param) {
-                return new UserWindowController.BookListCell();
+                return new LibrarianWindowController.BookListCell();
             }
         });
     }
@@ -104,7 +106,18 @@ public class LibrarianWindowController {
     }
 
     public void showAllBooks(ActionEvent event) {
-
+        try {
+            List<Book> allBooks = server.getAllBooks();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("allBooks-window.fxml"));
+            Scene scene = new Scene(loader.load());
+            AllBooksWindowController controller = loader.getController();
+            controller.loadBooks(allBooks);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception exception) {
+            showPopUpWindow("Warn", exception.getMessage());
+        }
     }
 
     static class BookListCell extends ListCell<Book> {
