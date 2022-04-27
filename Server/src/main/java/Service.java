@@ -9,6 +9,7 @@ public class Service implements IService {
     private IBookRepository bookRepo;
     private ILibraryUserRepository libraryUserRepo;
     private IBorrowRepository borrowRepo;
+    private ILibrarianRepository librarianRepo;
     private Map<String, IObserver> loggedClients;
 
     private final int defaultThreadsNo = 5;
@@ -17,6 +18,14 @@ public class Service implements IService {
         this.bookRepo = bookRepo;
         this.libraryUserRepo = libraryUserRepo;
         this.borrowRepo = borrowRepo;
+        loggedClients = new ConcurrentHashMap<>();
+    }
+
+    public Service(IBookRepository bookRepo, ILibraryUserRepository libraryUserRepo, IBorrowRepository borrowRepo, ILibrarianRepository librarianRepo) {
+        this.bookRepo = bookRepo;
+        this.libraryUserRepo = libraryUserRepo;
+        this.borrowRepo = borrowRepo;
+        this.librarianRepo = librarianRepo;
         loggedClients = new ConcurrentHashMap<>();
     }
 
@@ -73,6 +82,15 @@ public class Service implements IService {
         book.setStatus(Status.BORROWED);
         bookRepo.update(book, book.getID());
         notifyBookWasBorrowed();
+    }
+
+    @Override
+    public Librarian loginLibrarian(Librarian librarian) throws Exception {
+        Librarian searchedLibrarian = librarianRepo.findByUserNameAndPassword(librarian.getUserName(), librarian.getPassword());
+        if (searchedLibrarian == null) {
+            throw new Exception("Incorrect credentials!");
+        }
+        return searchedLibrarian;
     }
 
     private void notifyBookWasBorrowed() {

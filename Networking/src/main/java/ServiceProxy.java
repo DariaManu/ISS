@@ -43,6 +43,23 @@ public class ServiceProxy implements IService{
     }
 
     @Override
+    public Librarian loginLibrarian(Librarian librarian) throws Exception {
+        initializeConnection();
+        Request request = new Request.Builder().setRequestType(RequestType.LOGIN_LIBRARIAN).setData(librarian).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.OK) {
+            return (Librarian) response.getData();
+        }
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            closeConnection();
+            throw new Exception(error);
+        }
+        return librarian;
+    }
+
+    @Override
     public void logoutLibraryUser(LibraryUser libraryUser) throws Exception {
         Request request = new Request.Builder().setRequestType(RequestType.LOGOUT).setData(libraryUser).build();
         sendRequest(request);

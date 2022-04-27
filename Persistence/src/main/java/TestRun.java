@@ -8,7 +8,8 @@ public class TestRun {
         BookHibernateRepository bookRepo = new BookHibernateRepository();
         BorrowHibernateRepository borrowRepo = new BorrowHibernateRepository();
         LibrarianHibernateRepository librarianRepo = new LibrarianHibernateRepository();
-        Librarian librarian = librarianRepo.findByUserNameAndPassword("name.library", "pass1");
-        System.out.println(librarian);
+        //Librarian librarian = librarianRepo.findByUserNameAndPassword("name.library", "pass1");
+        String userName = "name.library";
+        System.out.println(userName.matches("^\\w+\\.library$"));
     }
 }

@@ -87,6 +87,17 @@ public class ClientWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleLOGIN_LIBRARIAN(Request request) {
+        System.out.println("Login Librarian request...");
+        Librarian librarian = (Librarian) request.getData();
+        try {
+            librarian = service.loginLibrarian(librarian);
+            return new Response.Builder().setResponseType(ResponseType.OK).setData(librarian).build();
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
     private Response handleLOGOUT(Request request) {
         System.out.println("Logout request...");
         LibraryUser libraryUser = (LibraryUser) request.getData();

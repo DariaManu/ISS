@@ -9,6 +9,7 @@ public class LoginController {
     private IService server;
     private Stage primaryStage;
     private LibraryUser currentLibraryUser;
+    private static final String LIBRARIAN_USER = "^\\w+\\.library$";
 
     @FXML
     private TextField usernameTextField;
@@ -30,21 +31,34 @@ public class LoginController {
     public void login(ActionEvent event) throws Exception {
         String userName = usernameTextField.getText();
         String password = passwordField.getText();
-        currentLibraryUser = new LibraryUser(userName, password);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("user-window.fxml"));
-            Scene scene = new Scene(loader.load());
-            UserWindowController userWindowController = loader.getController();
+        if (userName.matches(LIBRARIAN_USER)){
+            Librarian librarian = new Librarian(userName, password);
+            try {
+                librarian = server.loginLibrarian(librarian);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("librarian-window.fxml"));
+                Scene scene = new Scene(loader.load());
+                LibrarianWindowController librarianWindowController = loader.getController();
+                primaryStage.setScene(scene);
+            } catch (Exception exception) {
+                showPopUpWindow("Authentication failure", exception.getMessage());
+            }
+        } else {
+            currentLibraryUser = new LibraryUser(userName, password);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("user-window.fxml"));
+                Scene scene = new Scene(loader.load());
+                UserWindowController userWindowController = loader.getController();
 
-            currentLibraryUser = server.loginLibraryUser(currentLibraryUser, userWindowController);
+                currentLibraryUser = server.loginLibraryUser(currentLibraryUser, userWindowController);
 
-            userWindowController.setServer(server);
-            userWindowController.setPrimaryStage(primaryStage);
-            userWindowController.setLibraryUser(currentLibraryUser);
-            userWindowController.loadPageData();
-            primaryStage.setScene(scene);
-        } catch (Exception exception) {
-            showPopUpWindow("Authentication failure", exception.getMessage());
+                userWindowController.setServer(server);
+                userWindowController.setPrimaryStage(primaryStage);
+                userWindowController.setLibraryUser(currentLibraryUser);
+                userWindowController.loadPageData();
+                primaryStage.setScene(scene);
+            } catch (Exception exception) {
+                showPopUpWindow("Authentication failure", exception.getMessage());
+            }
         }
     }
 

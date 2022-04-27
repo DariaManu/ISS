@@ -7,4 +7,5 @@ public interface IService {
     List<Book> getAvailableBooks() throws Exception;
     List<Book> getBooksBorrowedByLibraryUser(Integer libraryUserId) throws Exception;
     void borrowBook(Borrow borrow) throws Exception;
+    Librarian loginLibrarian(Librarian librarian) throws Exception;
 }
