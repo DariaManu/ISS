@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class Service implements IService {
     private IBookRepository bookRepo;
@@ -121,6 +123,48 @@ public class Service implements IService {
     @Override
     public List<Book> getAllBooks() throws Exception {
         return bookRepo.getAll().stream().toList();
+    }
+
+    @Override
+    public List<Book> searchBookByTitle(String title) throws Exception {
+        return bookRepo.getBooksByTitle(title);
+    }
+
+    private List<Book> filterByGenre(List<Book> books, String genre) {
+        books = books.stream().filter((x) -> x.getGenre().equals(genre)).collect(Collectors.toList());
+        return books;
+    }
+
+    private List<Book> filterByAuthor(List<Book> books, String author) {
+        books = books.stream().filter((x) -> x.getAuthor().equals(author)).collect(Collectors.toList());
+        return books;
+    }
+
+    private List<Book> filterByPublishYear(List<Book> books, String publishYear) {
+        Integer year = Integer.valueOf(publishYear);
+        books = books.stream().filter((x) -> x.getPublishYear().equals(year)).collect(Collectors.toList());
+        return books;
+    }
+
+    @Override
+    public List<Book> filterBooks(String genre, String author, String publishYear) throws Exception {
+        List<Book> filteredBooks = bookRepo.getAvailableBooks();
+        if (!genre.equals(""))
+            filteredBooks = filterByGenre(filteredBooks, genre);
+        if (!author.equals(""))
+            filteredBooks = filterByAuthor(filteredBooks, author);
+        if (!publishYear.equals(""))
+            filteredBooks = filterByPublishYear(filteredBooks, publishYear);
+        return filteredBooks;
+    }
+
+    @Override
+    public Book recommendBook() throws Exception {
+        List<Book> books = bookRepo.getAvailableBooks();
+        if(books.isEmpty())
+            throw new Exception("There are no available books!");
+        Collections.shuffle(books);
+        return books.get(0);
     }
 
     private void notifyBookWasBorrowed() {

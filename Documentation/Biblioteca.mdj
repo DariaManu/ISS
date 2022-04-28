@@ -1643,7 +1643,7 @@
 									"font": "Arial;13;0",
 									"left": 222,
 									"top": 135,
-									"width": 142,
+									"width": 142.9072265625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/Y8OLUM2OUKI="
@@ -1850,7 +1850,7 @@
 									"font": "Arial;13;0",
 									"left": 436,
 									"top": 135.5,
-									"width": 171,
+									"width": 171.83349609375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/Y8PnAs3m1QQ="
@@ -2771,7 +2771,7 @@
 									"font": "Arial;13;0",
 									"left": 701,
 									"top": 147,
-									"width": 177,
+									"width": 177.6416015625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/Y9oZ79pKWkk="

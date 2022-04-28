@@ -177,6 +177,46 @@ public class ServiceProxy implements IService{
         return books;
     }
 
+    @Override
+    public List<Book> searchBookByTitle(String title) throws Exception {
+        Request request = new Request.Builder().setRequestType(RequestType.SEARCH_BOOK).setData(title).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+        List<Book> books = (List<Book>) response.getData();
+        return books;
+    }
+
+    @Override
+    public List<Book> filterBooks(String genre, String author, String publishYear) throws Exception {
+        FilterBooksDTO dto = DTOUtils.getDTO(genre, author, publishYear);
+        Request request = new Request.Builder().setRequestType(RequestType.FILTER_BOOKS).setData(dto).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+        List<Book> books = (List<Book>) response.getData();
+        return books;
+    }
+
+    @Override
+    public Book recommendBook() throws Exception {
+        Request request = new Request.Builder().setRequestType(RequestType.RECOMMEND_BOOK).build();
+        sendRequest(request);
+        Response response = readResponse();
+        if (response.getResponseType() == ResponseType.ERROR) {
+            String error = response.getData().toString();
+            throw new Exception(error);
+        }
+        Book book = (Book) response.getData();
+        return book;
+    }
+
     private void closeConnection() {
         finished = true;
         try{

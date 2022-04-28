@@ -12,4 +12,7 @@ public interface IService {
     void returnBook(Book book) throws Exception;
     void addBook(Book book) throws Exception;
     List<Book> getAllBooks() throws Exception;
+    List<Book> searchBookByTitle(String title) throws Exception;
+    List<Book> filterBooks(String genre, String author, String publishYear) throws Exception;
+    Book recommendBook() throws Exception;
 }

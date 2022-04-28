@@ -30,6 +30,31 @@ public class BookHibernateRepository implements IBookRepository {
     }
 
     @Override
+    public List<Book> getBooksByTitle(String title) {
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+        List<Book> books = null;
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                books = session.createNativeQuery("SELECT * FROM Books " +
+                                "WHERE title=? AND status='AVAILABLE'", Book.class)
+                        .setParameter(1, title)
+                        .list();
+                transaction.commit();
+                return books;
+            } catch (RuntimeException exception) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            }
+        } catch (Exception exception) {
+            System.out.println("Exception " + exception.getMessage());
+        }
+        return books;
+    }
+
+    @Override
     public void add(Book elem) {
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         try(Session session = sessionFactory.openSession()) {

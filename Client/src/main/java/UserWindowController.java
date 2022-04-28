@@ -32,6 +32,25 @@ public class UserWindowController implements IObserver {
     private Button logoutButton;
 
     @FXML
+    private TextField genreTextField;
+    @FXML
+    private TextField searchBookTextField;
+    @FXML
+    private Button searchBookButton;
+    @FXML
+    private TextField authorTextField;
+    @FXML
+    private TextField releaseYearTextField;
+    @FXML
+    private Button applyFiltersButton;
+    @FXML
+    private Button getRecommendationButton;
+    @FXML
+    private Button showBorrowedBooksButton;
+    @FXML
+    private Button clearFiltersButton;
+
+    @FXML
     public void initialize() {
         availableBooksListView.setItems(availableBooksModel);
         availableBooksListView.setCellFactory(new Callback<ListView<Book>, ListCell<Book>>() {
@@ -142,6 +161,41 @@ public class UserWindowController implements IObserver {
 
     public void showBorrowedBooks(ActionEvent event) {
         loadBorrowedBooks();
+    }
+
+    public void searchBook(ActionEvent event) {
+        String title = searchBookTextField.getText();
+        try {
+            List<Book> books = server.searchBookByTitle(title);
+            availableBooksModel.setAll(books);
+        } catch (Exception exception) {
+            showPopUpWindow("Warn", exception.getMessage());
+        }
+    }
+
+    public void applyFilters(ActionEvent event) {
+        String genre = genreTextField.getText();
+        String author = authorTextField.getText();
+        String publishYear = releaseYearTextField.getText();
+        try {
+            List<Book> books = server.filterBooks(genre, author, publishYear);
+            availableBooksModel.setAll(books);
+        } catch (Exception exception) {
+            showPopUpWindow("Warn", exception.getMessage());
+        }
+    }
+
+    public void getRecommendation(ActionEvent event) {
+        try {
+            Book book = server.recommendBook();
+            availableBooksModel.setAll(book);
+        } catch (Exception exception) {
+            showPopUpWindow("Warn", exception.getMessage());
+        }
+    }
+
+    public void clearFilters(ActionEvent event) {
+        loadAvailableBooks();
     }
 
     static class BookListCell extends ListCell<Book> {

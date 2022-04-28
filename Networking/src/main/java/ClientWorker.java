@@ -195,6 +195,41 @@ public class ClientWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleSEARCH_BOOK(Request request) {
+        System.out.println("SearchBook request...");
+        String title = request.getData().toString();
+        try {
+            List<Book> books = service.searchBookByTitle(title);
+            return new Response.Builder().setResponseType(ResponseType.OK).setData(books).build();
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
+    private Response handleFILTER_BOOKS(Request request) {
+        System.out.println("FilterBooks request...");
+        FilterBooksDTO dto = (FilterBooksDTO) request.getData();
+        String genre = dto.getGenre();
+        String author = dto.getAuthor();
+        String publishYear = dto.getPublishYear();
+        try {
+            List<Book> books = service.filterBooks(genre, author, publishYear);
+            return new Response.Builder().setResponseType(ResponseType.OK).setData(books).build();
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
+    private Response handleRECOMMEND_BOOK(Request request) {
+        System.out.println("RecommendBook request...");
+        try {
+            Book book = service.recommendBook();
+            return new Response.Builder().setResponseType(ResponseType.OK).setData(book).build();
+        } catch (Exception exception) {
+            return new Response.Builder().setResponseType(ResponseType.ERROR).setData(exception.getMessage()).build();
+        }
+    }
+
     @Override
     public void bookWasBorrowed(List<Book> availableBooks) throws Exception{
         Response response = new Response.Builder().setResponseType(ResponseType.BOOK_BORROWED).setData(availableBooks).build();

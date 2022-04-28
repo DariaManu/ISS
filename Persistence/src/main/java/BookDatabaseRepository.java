@@ -103,4 +103,9 @@ public class BookDatabaseRepository implements IBookRepository{
         }
         return books;
     }
+
+    @Override
+    public List<Book> getBooksByTitle(String title) {
+        return null;
+    }
 }
