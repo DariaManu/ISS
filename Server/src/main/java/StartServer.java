@@ -26,7 +26,7 @@ public class StartServer {
         BorrowHibernateRepository borrowHibernateRepository = new BorrowHibernateRepository();
         LibrarianHibernateRepository librarianHibernateRepository = new LibrarianHibernateRepository();
         //IService service = new Service(bookRepository, libraryUserRepository, borrowRepository);
-        IService service = new Service(bookHibernateRepository, libraryUserHibernateRepository, borrowRepository, librarianHibernateRepository);
+        IService service = new Service(bookHibernateRepository, libraryUserHibernateRepository, borrowHibernateRepository, librarianHibernateRepository);
 
         int serverPort = defaultPort;
         try{

@@ -9,7 +9,9 @@ public class TestRun {
         BorrowHibernateRepository borrowRepo = new BorrowHibernateRepository();
         LibrarianHibernateRepository librarianRepo = new LibrarianHibernateRepository();
         //Librarian librarian = librarianRepo.findByUserNameAndPassword("name.library", "pass1");
-        String userName = "name.library";
-        System.out.println(userName.matches("^\\w+\\.library$"));
+        //String userName = "name.library";
+        //System.out.println(userName.matches("^\\w+\\.library$"));
+        borrowRepo.deleteByBookId(2);
+        System.out.println("done");
     }
 }
