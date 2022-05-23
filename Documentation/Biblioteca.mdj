@@ -14028,7 +14028,7 @@
 											"top": 1239,
 											"width": 239,
 											"height": 13,
-											"text": "LibraryUserRepository"
+											"text": "LibraryUserHibernateRepository"
 										},
 										{
 											"_type": "LabelView",
@@ -14257,7 +14257,7 @@
 											"top": 1239,
 											"width": 177.6201171875,
 											"height": 13,
-											"text": "BookRepository"
+											"text": "BookHibernateRepository"
 										},
 										{
 											"_type": "LabelView",
@@ -14518,9 +14518,9 @@
 											"font": "Arial;13;1",
 											"left": 1605,
 											"top": 1239,
-											"width": 175.2333984375,
+											"width": 183,
 											"height": 13,
-											"text": "BorrowRepository"
+											"text": "BorrowHibernateRepository"
 										},
 										{
 											"_type": "LabelView",
@@ -14553,7 +14553,7 @@
 									"font": "Arial;13;0",
 									"left": 1600,
 									"top": 1232,
-									"width": 185.2333984375,
+									"width": 193,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/8+LTj4cBD/o="
@@ -14580,7 +14580,7 @@
 									"font": "Arial;13;0",
 									"left": 1600,
 									"top": 1257,
-									"width": 185.2333984375,
+									"width": 193,
 									"height": 10
 								},
 								{
@@ -14605,7 +14605,7 @@
 											"font": "Arial;13;0",
 											"left": 1605,
 											"top": 1272,
-											"width": 175.2333984375,
+											"width": 183,
 											"height": 13,
 											"text": "+add(borrow: Borrow)",
 											"horizontalAlignment": 0
@@ -14622,7 +14622,7 @@
 											"font": "Arial;13;0",
 											"left": 1605,
 											"top": 1287,
-											"width": 175.2333984375,
+											"width": 183,
 											"height": 13,
 											"text": "+deleteByBookId(bokId: int)",
 											"horizontalAlignment": 0
@@ -14631,7 +14631,7 @@
 									"font": "Arial;13;0",
 									"left": 1600,
 									"top": 1267,
-									"width": 185.2333984375,
+									"width": 193,
 									"height": 38
 								},
 								{
@@ -14671,7 +14671,7 @@
 							"containerChangeable": true,
 							"left": 1600,
 							"top": 1232,
-							"width": 185.2333984375,
+							"width": 193,
 							"height": 145,
 							"nameCompartment": {
 								"$ref": "AAAAAAF/8+LTj4cA2c4="
@@ -21550,7 +21550,7 @@
 							"tail": {
 								"$ref": "AAAAAAF/8+LTjob/qow="
 							},
-							"points": "1784:1248;1840:1248;1840:744;1728:744",
+							"points": "1792:1248;1840:1248;1840:744;1728:744",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGAJAc+yHrvAY0="
@@ -21583,7 +21583,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1793,
+									"left": 1801,
 									"top": 1225,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -21604,7 +21604,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 1778,
+									"left": 1786,
 									"top": 1225,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -21625,7 +21625,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1823,
+									"left": 1831,
 									"top": 1226,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -21643,7 +21643,7 @@
 							"tail": {
 								"$ref": "AAAAAAF/8+LTjob/qow="
 							},
-							"points": "1784:1232;1808:1232;1808:968",
+							"points": "1792:1232;1816:1232;1816:968",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGAJAetGn7nSHY="
@@ -21736,7 +21736,7 @@
 							"tail": {
 								"$ref": "AAAAAAF/8+LTjob/qow="
 							},
-							"points": "1784:1328;1880:1328;1880:640;1728:640",
+							"points": "1792:1328;1880:1328;1880:640;1728:640",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGAJAihwYqFOw0="
@@ -26749,7 +26749,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "LibraryUserRepository",
+					"name": "LibraryUserHibernateRepository",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -26842,7 +26842,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "BookRepository",
+					"name": "BookHibernateRepository",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -26953,7 +26953,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "BorrowRepository",
+					"name": "BorrowHibernateRepository",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -31762,9 +31762,9 @@
 														"$ref": "AAAAAAGAKWra66gUQdE="
 													},
 													"font": "Arial;13;0",
-													"left": 40.72998046875,
+													"left": 38.55908203125,
 													"top": 5,
-													"width": 151.3125,
+													"width": 136.02099609375,
 													"height": 13,
 													"text": "SequenceDiagramSignUp"
 												},
@@ -31777,7 +31777,7 @@
 													"font": "Arial;13;1",
 													"left": 21,
 													"top": 5,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -47688,9 +47688,9 @@
 														"$ref": "AAAAAAGAzl7x/CD9BwI="
 													},
 													"font": "Arial;13;0",
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 5,
-													"width": 209.0888671875,
+													"width": 193.8037109375,
 													"height": 13,
 													"text": "CommunicationDiagramReturnBook"
 												},
@@ -47703,7 +47703,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 5,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -55198,9 +55198,9 @@
 														"$ref": "AAAAAAGA0bkdRkfsgGc="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 13,
-													"width": 261.14599609375,
+													"width": 234.93017578125,
 													"height": 13,
 													"text": "SequenceDiagramGetBookRecommendation"
 												},
@@ -55213,7 +55213,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -59689,9 +59689,9 @@
 														"$ref": "AAAAAAGA0dKZv00Rlgc="
 													},
 													"font": "Arial;13;0",
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 13,
-													"width": 172.74853515625,
+													"width": 156.8984375,
 													"height": 13,
 													"text": "SequenceDiagramViewBooks"
 												},
@@ -59704,7 +59704,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
